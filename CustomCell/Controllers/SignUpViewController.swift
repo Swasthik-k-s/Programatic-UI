@@ -11,7 +11,7 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         configureUI()
         // Do any additional setup after loading the view.
     }
@@ -30,120 +30,28 @@ class SignUpViewController: UIViewController {
         return photo
     }()
     
-    let firstNameContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = .white
-        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        container.layer.cornerRadius = 5
+    var firstNameTextField = CustomTextField(placeholder: "First Name")
+    var lastNameTextField = CustomTextField(placeholder: "Last Name")
+    var emailTextField = CustomTextField(placeholder: "Email")
+    var passwordTextField = CustomTextField(placeholder: "Password")
+    
+    lazy var firstNameContainer: InputContainerView = {
+       return InputContainerView(image: UIImage(systemName: "person.fill")!, textField: firstNameTextField)
         
-        let iv = UIImageView()
-        container.addSubview(iv)
-        iv.image = UIImage(systemName: "person.fill")
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        iv.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 10).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        let firstName = UITextField()
-        container.addSubview(firstName)
-        firstName.placeholder = "First Name"
-        firstName.backgroundColor = .white
-        firstName.translatesAutoresizingMaskIntoConstraints = false
-        firstName.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        firstName.leftAnchor.constraint(equalTo: iv.rightAnchor,constant: 10).isActive = true
-        firstName.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -10).isActive = true
-        firstName.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        return container
     }()
     
-    let lastNameContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = .white
-        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        container.layer.cornerRadius = 5
-        
-        let iv = UIImageView()
-        container.addSubview(iv)
-        iv.image = UIImage(systemName: "person.fill")
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        iv.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 10).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        let lastName = UITextField()
-        container.addSubview(lastName)
-        lastName.placeholder = "Last Name"
-        lastName.backgroundColor = .white
-        lastName.translatesAutoresizingMaskIntoConstraints = false
-        lastName.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        lastName.leftAnchor.constraint(equalTo: iv.rightAnchor,constant: 10).isActive = true
-        lastName.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -10).isActive = true
-        lastName.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        return container
+    lazy var lastNameContainer: InputContainerView = {
+       return InputContainerView(image: UIImage(systemName: "person.fill")!, textField: lastNameTextField)
     }()
     
-    let emailContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = .white
-        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        container.layer.cornerRadius = 5
+    lazy var emailContainer: InputContainerView = {
+       return InputContainerView(image: UIImage(systemName: "person.fill")!, textField: emailTextField)
         
-        let iv = UIImageView()
-        container.addSubview(iv)
-        iv.image = UIImage(systemName: "person.fill")
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        iv.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 10).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        let email = UITextField()
-        container.addSubview(email)
-        email.placeholder = "Email"
-        email.backgroundColor = .white
-        email.keyboardType = .emailAddress
-        email.translatesAutoresizingMaskIntoConstraints = false
-        email.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        email.leftAnchor.constraint(equalTo: iv.rightAnchor,constant: 10).isActive = true
-        email.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -10).isActive = true
-        email.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        return container
     }()
     
-    let passwordContainerView: UIView = {
-        let container = UIView()
-        container.backgroundColor = .white
-        container.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        container.layer.cornerRadius = 5
-        
-        let iv = UIImageView()
-        container.addSubview(iv)
-        iv.image = UIImage(systemName: "person.fill")
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        iv.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 10).isActive = true
-        iv.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        
-        let password = UITextField()
-        container.addSubview(password)
-        password.placeholder = "Password"
-        password.backgroundColor = .white
-        password.isSecureTextEntry = true
-        password.translatesAutoresizingMaskIntoConstraints = false
-        password.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
-        password.leftAnchor.constraint(equalTo: iv.rightAnchor,constant: 10).isActive = true
-        password.rightAnchor.constraint(equalTo: container.rightAnchor, constant: -10).isActive = true
-        password.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        return container
+    lazy var passwordContainer: InputContainerView = {
+       return InputContainerView(image: UIImage(systemName: "person.fill")!, textField: passwordTextField)
     }()
-    
     
     var signUpButton: UIButton = {
         let button = UIButton()
@@ -169,10 +77,10 @@ class SignUpViewController: UIViewController {
     
     func configureUI() {
         
-        stackView.addArrangedSubview(firstNameContainerView)
-        stackView.addArrangedSubview(lastNameContainerView)
-        stackView.addArrangedSubview(emailContainerView)
-        stackView.addArrangedSubview(passwordContainerView)
+        stackView.addArrangedSubview(firstNameContainer)
+        stackView.addArrangedSubview(lastNameContainer)
+        stackView.addArrangedSubview(emailContainer)
+        stackView.addArrangedSubview(passwordContainer)
         stackView.addArrangedSubview(signUpButton)
         
         view.addSubview(photo)
@@ -180,8 +88,6 @@ class SignUpViewController: UIViewController {
         
         photo.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
-//        emailField.translatesAutoresizingMaskIntoConstraints = false
-//        passwordField.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             photo.centerXAnchor.constraint(equalTo: view.centerXAnchor),

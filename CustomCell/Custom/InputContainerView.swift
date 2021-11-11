@@ -13,6 +13,9 @@ class InputContainerView: UIView {
         super.init(frame: .zero)
         backgroundColor = .white
         heightAnchor.constraint(equalToConstant: 50).isActive = true
+        layer.borderColor = UIColor.blue.cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 5
         
         let iv = UIImageView()
         addSubview(iv)
